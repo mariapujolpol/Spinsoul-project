@@ -1,24 +1,21 @@
+import { Link } from "react-router-dom";
+import "./ReleaseCard.css";
+
 export default function ReleaseCard({ release }) {
   return (
-    <div
-      style={{
-        width: 220,
-        border: "1px solid #ddd",
-        borderRadius: 12,
-        overflow: "hidden",
-      }}
-    >
+
+    <div className="release-card">
       <img
         src={release.coverUrl}
         alt={release.title}
-        style={{ width: "100%", height: 220, objectFit: "cover" }}
+        className="release-card__image"
       />
-      <div style={{ padding: 12 }}>
-        <h3 style={{ margin: "0 0 6px" }}>{release.title}</h3>
-        <p style={{ margin: 0, opacity: 0.8 }}>
+      <div className="release-card__content">
+        <h3 className="release-card__title">{release.title}</h3>
+        <p className="release-card__info">
           {release.year} • {release.genre}
         </p>
-        <p style={{ margin: "6px 0 0" }}>⭐ {release.rating ?? "-"}</p>
+        <p className="release-card__rating">⭐ {release.rating ?? "-"}</p>
       </div>
     </div>
   );
