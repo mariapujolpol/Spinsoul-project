@@ -1,0 +1,204 @@
+{
+  "artists": [
+    {
+      "id": 1,
+      "name": "Daft Punk",
+      "country": "France",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Daft+Punk"
+    },
+    {
+      "id": 2,
+      "name": "Radiohead",
+      "country": "UK",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Radiohead"
+    },
+    {
+      "id": 3,
+      "name": "Björk",
+      "country": "Iceland",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Bjork"
+    },
+    {
+      "id": 4,
+      "name": "Kendrick Lamar",
+      "country": "USA",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Kendrick"
+    },
+    {
+      "id": 5,
+      "name": "Deftones",
+      "country": "USA",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Deftones"
+    },
+    {
+      "id": 6,
+      "name": "Nina Simone",
+      "country": "USA",
+      "imageUrl": "https://via.placeholder.com/300x300?text=Nina+Simone"
+    }
+  ],
+  "releases": [
+    {
+      "id": 101,
+      "title": "Discovery",
+      "year": 2001,
+      "genre": "Electronic",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Discovery",
+      "artistId": 1
+    },
+    {
+      "id": 102,
+      "title": "Random Access Memories",
+      "year": 2013,
+      "genre": "Electronic",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=RAM",
+      "artistId": 1
+    },
+    {
+      "id": 103,
+      "title": "Homework",
+      "year": 1997,
+      "genre": "Electronic",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Homework",
+      "artistId": 1
+    },
+    {
+      "id": 104,
+      "title": "OK Computer",
+      "year": 1997,
+      "genre": "Alternative",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=OK+Computer",
+      "artistId": 2
+    },
+    {
+      "id": 105,
+      "title": "Kid A",
+      "year": 2000,
+      "genre": "Alternative",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Kid+A",
+      "artistId": 2
+    },
+    {
+      "id": 106,
+      "title": "In Rainbows",
+      "year": 2007,
+      "genre": "Alternative",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=In+Rainbows",
+      "artistId": 2
+    },
+    {
+      "id": 107,
+      "title": "Homogenic",
+      "year": 1997,
+      "genre": "Electronic",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Homogenic",
+      "artistId": 3
+    },
+    {
+      "id": 108,
+      "title": "Post",
+      "year": 1995,
+      "genre": "Electronic",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Post",
+      "artistId": 3
+    },
+    {
+      "id": 109,
+      "title": "Vespertine",
+      "year": 2001,
+      "genre": "Electronic",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Vespertine",
+      "artistId": 3
+    },
+    {
+      "id": 110,
+      "title": "good kid, m.A.A.d city",
+      "year": 2012,
+      "genre": "Hip-Hop",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=GKMC",
+      "artistId": 4
+    },
+    {
+      "id": 111,
+      "title": "To Pimp a Butterfly",
+      "year": 2015,
+      "genre": "Hip-Hop",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=TPAB",
+      "artistId": 4
+    },
+    {
+      "id": 112,
+      "title": "DAMN.",
+      "year": 2017,
+      "genre": "Hip-Hop",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=DAMN",
+      "artistId": 4
+    },
+    {
+      "id": 113,
+      "title": "White Pony",
+      "year": 2000,
+      "genre": "Metal",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=White+Pony",
+      "artistId": 5
+    },
+    {
+      "id": 114,
+      "title": "Around the Fur",
+      "year": 1997,
+      "genre": "Metal",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Around+the+Fur",
+      "artistId": 5
+    },
+    {
+      "id": 115,
+      "title": "Koi No Yokan",
+      "year": 2012,
+      "genre": "Metal",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Koi+No+Yokan",
+      "artistId": 5
+    },
+    {
+      "id": 116,
+      "title": "I Put a Spell on You",
+      "year": 1965,
+      "genre": "Jazz",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Spell+on+You",
+      "artistId": 6
+    },
+    {
+      "id": 117,
+      "title": "Pastel Blues",
+      "year": 1965,
+      "genre": "Jazz",
+      "rating": 5,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Pastel+Blues",
+      "artistId": 6
+    },
+    {
+      "id": 118,
+      "title": "Little Girl Blue",
+      "year": 1958,
+      "genre": "Jazz",
+      "rating": 4,
+      "coverUrl": "https://via.placeholder.com/300x300?text=Little+Girl+Blue",
+      "artistId": 6
+    }
+  ]
+}
