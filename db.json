@@ -47,7 +47,7 @@
   { "id": 105, "title": "Kid A", "coverUrl": "/images/covers/kida.jpg", "artistId": 2 },
   { "id": 106, "title": "In Rainbows", "coverUrl": "/images/covers/inrainbows.jpg", "artistId": 2 },
 
-  { "id": 107, "title": "Homogenic", "coverUrl": "/images/covers/homogenic.jpg", "artistId": 3 },
+  { "id": 107, "title": "Homogenic", "coverUrl": "/images/covers/homogenic.png", "artistId": 3 },
   { "id": 108, "title": "Post", "coverUrl": "/images/covers/post.jpg", "artistId": 3 },
   { "id": 109, "title": "Vespertine", "coverUrl": "/images/covers/vespertine.jpg", "artistId": 3 },
 

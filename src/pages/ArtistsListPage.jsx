@@ -21,13 +21,16 @@ function ArtistsListPage() {
     }, []);
 
 return (
-    <div>
-        <h1>All Artists</h1>
-        
-            {artists.map((artist) => (
-                <ArtistCard key={artist.id} artist={artist} />
-            ))}
-        
+    <div className="page">
+      <div className="meta-row">
+        <span>{artists.length} artists</span>
+      </div>
+
+      <div className="grid">
+        {artists.map((artist) => (
+          <ArtistCard key={artist.id} artist={artist} />
+        ))}
+      </div>
     </div>
 )
 }
