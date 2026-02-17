@@ -19,8 +19,8 @@ function HomePage() {
       .catch((err) => console.error(err));
   }, []);
 
- const suggestedReleases = useMemo(() => releases.slice(0, 10), [releases]); // usamos useMemo para memorizar los lanzamientos sugeridos y evitar cálculos innecesarios en cada renderizado. Aquí simplemente tomamos los primeros 10 lanzamientos de la lista completa.
-const suggestedArtists = useMemo(() => artists.slice(0, 8), [artists]); // hacemos lo mismo para los artistas sugeridos, tomando los primeros 8 de la lista completa.
+ const suggestedReleases = useMemo(() => releases.slice(0, 10), [releases]);
+const suggestedArtists = useMemo(() => artists.slice(0, 8), [artists]);
 
 
   return (

@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 function AddRecordPage() {
 
   const navigate = useNavigate();
-
-  // aquí definimos los estados para cada uno de los campos del formulario que vamos a crear para añadir un nuevo lanzamiento (record)
+  
 
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
@@ -14,17 +13,17 @@ function AddRecordPage() {
   const [genre, setGenre] = useState("");
   const [cover, setCover] = useState("");
 
-  const handleSubmit = (e) => { // aqui hacemos un event listener para que cuando se haga submit, se ejecute la función handleSubmit
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newRecord = { // creamos un objeto con los datos del nuevo lanzamiento que vamos a enviar a la API para que lo guarde en la base de datos
+    const newRecord = {
       title: title,
       artist: artist,
       year: year,
       genre: genre
     };
 
-    axios.post("http://localhost:5005/releases", newRecord) // hacemos la petición a la API para que lo guarde en la base de datos
+    axios.post("http://localhost:5005/releases", newRecord)
       .then(() => {
         navigate("/releases");
       })
@@ -35,11 +34,11 @@ function AddRecordPage() {
 
   return (
     <div>
-      <h1>Add Record</h1> {/* aqui creamos un formulario con los campos necesarios para añadir un nuevo lanzamiento (record) y un botón para enviar el formulario */}
+      <h1>Add Record</h1>
 
       <form onSubmit={handleSubmit}> {/* hacemos un form con un event listener para que cuando se haga submit, se ejecute la función handleSubmit*/}
         <div>
-          <label>Title:</label>   {/* aqui creamos un input para cada uno de los campos del formulario, y le damos un value que es el estado correspondiente a cada campo, y un onChange para que cuando se escriba en el input, se actualice el estado correspondiente */}
+          <label>Title:</label>
           <input
             type="text"
             value={title}
