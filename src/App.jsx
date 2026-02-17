@@ -9,6 +9,8 @@ import ReleaseDetailsPage from "./pages/ReleaseDetailsPage.jsx"; // si lo usas d
 import ArtistsListPage from "./pages/ArtistsListPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import Footer from "./components/Footer";
+
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -34,6 +36,7 @@ export default function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
