@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Footer() {
+export default function Footer() { //Esta función es para el pie de pagina que se encuentra en todas las paginas. Con las diferentes textos y enlaces.
   return (
     <footer className="footer">
       <div className="footer-inner">

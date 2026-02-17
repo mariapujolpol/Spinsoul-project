@@ -13,3 +13,6 @@ export default function ArtistCard({ artist }) {
     </Link>
   );
 }
+
+
+//Aqui importamos Link de react-router-dom y lo usamos para crear un enlace a la página de detalles del artista

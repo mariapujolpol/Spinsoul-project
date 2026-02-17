@@ -25,7 +25,7 @@ export default function Navbar({ query, setQuery, onAddRecord }) {
         </nav>
 
         <div className="toolbar">
-          {showSearch && (
+          {showSearch && (  
             <SearchBar
               value={query}
               onChange={setQuery}
@@ -41,3 +41,6 @@ export default function Navbar({ query, setQuery, onAddRecord }) {
     </header>
   );
 }
+
+// Importamos NavLink y useLocation de react-router-dom para crear un enlace a la página de detalles del artista
+// Para el navbar hacemos que se muestre como en Footer y con un enlace a la página de detalles del artista

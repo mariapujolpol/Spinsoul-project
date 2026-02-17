@@ -10,7 +10,7 @@ import ArtistsListPage from "./pages/ArtistsListPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import Footer from "./components/Footer";
-
+import AddRecordPage from "./pages/AddRecordPage.jsx";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -18,7 +18,7 @@ export default function App() {
 
   function handleAddRecord() {
     // cuando tengas el form, cambia a: navigate("/releases/new")
-    navigate("/releases");
+    navigate("/releases/new");
   }
 
   return (
@@ -33,6 +33,10 @@ export default function App() {
         <Route path="/artists" element={<ArtistsListPage />} />
 
         <Route path="/about" element={<AboutPage />} />
+
+        <Route path="/releases/:id" element={<ReleaseDetailsPage />} />
+
+        <Route path="/releases/new" element={<AddRecordPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
