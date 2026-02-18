@@ -50,16 +50,25 @@ export default function ReleaseDetailsPage() {
   rating={release.rating ?? 0}
   onChange={async (newRating) => {
     try {
-      const res = await axios.patch(
+      await axios.patch(
         `https://spinsoul-json-server.onrender.com/releases/${releaseId}`,
         { rating: newRating }
       );
-      setRelease(res.data);
+
+      // 🔥 Actualizamos el estado manualmente
+      setRelease((prev) => ({
+        ...prev,
+        rating: newRating,
+      }));
+
     } catch (err) {
       console.error(err);
     }
   }}
 />
+
+
+ 
 
 
           {release.review && <p className="details-text">{release.review}</p>}
