@@ -7,27 +7,41 @@ function HomePage() {
   const [artists, setArtists] = useState([]);
   const [releases, setReleases] = useState([]);
 
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
+
   useEffect(() => {
-    // usamos el useEffect para ejecutar el código cuando el componente se monta
     axios
-      .get("https://spinsoul-json-server.onrender.com/artists") // usamos axios para hacer la petición a la API para traer los artistas y guardarlos en el estado
+      .get("https://spinsoul-json-server.onrender.com/artists")
       .then((res) => setArtists(res.data))
       .catch((err) => console.error(err));
 
     axios
-      .get("https://spinsoul-json-server.onrender.com/releases") // y aqui hacemos lo mismo para los lanzamientos (releases)
+      .get("https://spinsoul-json-server.onrender.com/releases")
       .then((res) => setReleases(res.data))
       .catch((err) => console.error(err));
   }, []);
 
-  const suggestedReleases = releases.slice(0, 10);
+  const filteredReleases = releases.filter((release) => {
+
+    const matchesGenre =
+      selectedGenre === "" || release.genre === selectedGenre;
+
+    const artist = artists.find(
+      (artist) => Number(artist.id) === release.artistId
+    );
+
+    const matchesCountry =
+      selectedCountry === "" || artist?.country === selectedCountry;
+
+    return matchesGenre && matchesCountry;
+  });
+
+  const suggestedReleases = filteredReleases.slice(0, 10);
   const suggestedArtists = artists.slice(0, 10);
 
   return (
     <div className="page">
-      {" "}
-      {/* Aqui creamos la estructura de la página con diferentes secciones como el navbar, el hero y el footer */}
-      {/* HERO */}
       <section className="hero-card">
         <div className="hero-left">
           <h1 className="hero-title">
@@ -39,29 +53,23 @@ function HomePage() {
           </p>
 
           <div className="hero-actions">
-            <Link
-              className="btn"
-              to="/releases"
-              style={{ textDecoration: "none" }}
-            >
+            <Link className="btn" to="/releases" style={{ textDecoration: "none" }}>
               Explore Records
             </Link>
 
-            <Link
-              className="btn-secondary"
-              to="/artists"
-              style={{ textDecoration: "none" }}
-            >
+            <Link className="btn-secondary" to="/artists" style={{ textDecoration: "none" }}>
               Browse Artists
             </Link>
           </div>
         </div>
 
         <div className="hero-right">
-          {" "}
-          {/* Aqui creamos la sección de filtros para buscar lanzamientos y artistas pero lo tenemos que acabar con la parte de la API */}
           <div className="hero-filters">
-            <select className="select">
+            <select
+              className="select"
+              value={selectedGenre}
+              onChange={(e) => setSelectedGenre(e.target.value)}
+            >
               <option value="">Select Genre</option>
               <option value="Electronic">Electronic</option>
               <option value="Alternative">Alternative</option>
@@ -70,12 +78,17 @@ function HomePage() {
               <option value="Metal">Metal</option>
             </select>
 
-            <select className="select">
+            <select
+              className="select"
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.target.value)}
+            >
               <option value="">Select Country</option>
               <option value="USA">USA</option>
               <option value="UK">UK</option>
               <option value="France">France</option>
               <option value="Iceland">Iceland</option>
+              <option value="Puerto Rico">Puerto Rico</option>
             </select>
 
             <Link
@@ -85,32 +98,30 @@ function HomePage() {
             >
               Explore Artists
             </Link>
-
-            <p className="hero-note">
-              {/* * Filters are UI-only for now (we’ll connect them later). */}
-            </p>
           </div>
         </div>
       </section>
-      {/* SUGGESTED RELEASES */}
+
       <div className="meta-row">
         <span>✨ Suggested Releases</span>
         <Link className="meta-link" to="/releases">
           See all →
         </Link>
       </div>
+
       <div className="grid">
         {suggestedReleases.map((release) => (
           <ReleaseCard key={release.id} release={release} onDelete={null} />
         ))}
       </div>
-      {/* SUGGESTED ARTISTS */}
+
       <div className="meta-row meta-row-spaced">
         <span>✨ Suggested Artists</span>
         <Link className="meta-link" to="/artists">
           Browse →
         </Link>
       </div>
+
       <div className="grid">
         {suggestedArtists.map((artist) => (
           <Link
