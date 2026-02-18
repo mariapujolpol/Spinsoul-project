@@ -66,7 +66,7 @@ export default function ReleaseDetailsPage() {
     }
   }}
 />
-<p>Rating actual: {release.rating}</p>
+<p>Rating: {release.rating}</p>
 
 
  
