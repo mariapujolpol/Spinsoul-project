@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ReleaseCard from "../components/ReleaseCard";
@@ -7,7 +7,8 @@ function HomePage() {
   const [artists, setArtists] = useState([]);
   const [releases, setReleases] = useState([]);
 
-  useEffect(() => {  // usamos el useEffect para ejecutar el código cuando el componente se monta
+  useEffect(() => {
+    // usamos el useEffect para ejecutar el código cuando el componente se monta
     axios
       .get("http://localhost:5005/artists") // usamos axios para hacer la petición a la API para traer los artistas y guardarlos en el estado
       .then((res) => setArtists(res.data))
@@ -19,12 +20,13 @@ function HomePage() {
       .catch((err) => console.error(err));
   }, []);
 
-const suggestedReleases =  releases.slice(0, 10)
-const suggestedArtists =  artists.slice(0, 8)
-
+  const suggestedReleases = releases.slice(0, 10);
+  const suggestedArtists = artists.slice(0, 10);
 
   return (
-    <div className="page"> {/* Aqui creamos la estructura de la página con diferentes secciones como el navbar, el hero y el footer */}
+    <div className="page">
+      {" "}
+      {/* Aqui creamos la estructura de la página con diferentes secciones como el navbar, el hero y el footer */}
       {/* HERO */}
       <section className="hero-card">
         <div className="hero-left">
@@ -32,21 +34,32 @@ const suggestedArtists =  artists.slice(0, 8)
             Discover the Sound <br /> of the World
           </h1>
           <p className="hero-text">
-            Build your vinyl dashboard: track releases, rate them, and explore artists.
+            Build your vinyl dashboard: track releases, rate them, and explore
+            artists.
           </p>
 
           <div className="hero-actions">
-            <Link className="btn" to="/releases" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn"
+              to="/releases"
+              style={{ textDecoration: "none" }}
+            >
               Explore Records
             </Link>
 
-            <Link className="btn-secondary" to="/artists" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn-secondary"
+              to="/artists"
+              style={{ textDecoration: "none" }}
+            >
               Browse Artists
             </Link>
           </div>
         </div>
 
-        <div className="hero-right">  {/* Aqui creamos la sección de filtros para buscar lanzamientos y artistas pero lo tenemos que acabar con la parte de la API */}
+        <div className="hero-right">
+          {" "}
+          {/* Aqui creamos la sección de filtros para buscar lanzamientos y artistas pero lo tenemos que acabar con la parte de la API */}
           <div className="hero-filters">
             <select className="select">
               <option value="">Select Genre</option>
@@ -65,7 +78,11 @@ const suggestedArtists =  artists.slice(0, 8)
               <option value="Iceland">Iceland</option>
             </select>
 
-            <Link className="btn hero-btn-full" to="/artists" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn hero-btn-full"
+              to="/artists"
+              style={{ textDecoration: "none" }}
+            >
               Explore Artists
             </Link>
 
@@ -75,7 +92,6 @@ const suggestedArtists =  artists.slice(0, 8)
           </div>
         </div>
       </section>
-
       {/* SUGGESTED RELEASES */}
       <div className="meta-row">
         <span>✨ Suggested Releases</span>
@@ -83,13 +99,11 @@ const suggestedArtists =  artists.slice(0, 8)
           See all →
         </Link>
       </div>
-
       <div className="grid">
         {suggestedReleases.map((release) => (
           <ReleaseCard key={release.id} release={release} onDelete={null} />
         ))}
       </div>
-
       {/* SUGGESTED ARTISTS */}
       <div className="meta-row meta-row-spaced">
         <span>✨ Suggested Artists</span>
@@ -97,10 +111,13 @@ const suggestedArtists =  artists.slice(0, 8)
           Browse →
         </Link>
       </div>
-
-      <div className="grid"> 
+      <div className="grid">
         {suggestedArtists.map((artist) => (
-          <Link key={artist.id} to={`/artists/${artist.id}`} style={{ textDecoration: "none" }}>
+          <Link
+            key={artist.id}
+            to={`/artists/${artist.id}`}
+            style={{ textDecoration: "none" }}
+          >
             <div className="card">
               <img className="cover" src={artist.imageUrl} alt={artist.name} />
               <div className="card-body">
@@ -114,6 +131,5 @@ const suggestedArtists =  artists.slice(0, 8)
     </div>
   );
 }
-
 
 export default HomePage;
