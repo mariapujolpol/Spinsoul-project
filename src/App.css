@@ -180,6 +180,7 @@ a{ color: inherit; }
   display: inline-flex;
   gap: 8px;
   margin: 12px 0;
+  cursor: pointer;
 }
 
 .star {
@@ -188,8 +189,8 @@ a{ color: inherit; }
   line-height: 1;
   color: rgba(255,255,255,0.25);
   cursor: pointer;
-  user-select: none;
   transition: transform 0.15s ease, color 0.2s ease, text-shadow 0.2s ease;
+  user-select: none;
 }
 
 .star.active {
