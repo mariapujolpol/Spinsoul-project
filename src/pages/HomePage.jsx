@@ -125,6 +125,7 @@ const suggestedArtists = filteredArtists.slice(0, 10);
             </Link>
             <button className="btn hero-btn-full"
             onClick={handleReset}
+            style={{ textDecoration: "none" }}
             >
               Reset Filters
             </button>
