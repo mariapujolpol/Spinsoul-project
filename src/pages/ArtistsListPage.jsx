@@ -6,6 +6,7 @@ import ReleaseCard from '../components/ReleaseCard';
 
 
 
+
 function ArtistsListPage() {
     const [artists, setArtists] = useState([]);
 
@@ -19,6 +20,10 @@ function ArtistsListPage() {
         });
         
     }, []);
+  
+    const filteredArtists = artists.filter((artist) =>
+    artist.title.toLowerCase().includes(query.toLowerCase())
+  );
 
 return (
     <div className="page">
