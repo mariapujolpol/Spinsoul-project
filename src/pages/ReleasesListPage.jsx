@@ -1,22 +1,38 @@
-// importamos useState y useEffect de react para poder usarlos en el componente (y axios para hacer las peticiones a la API) 
+// importamos useState y useEffect de react para poder usarlos en el componente (y axios para hacer las peticiones a la API)
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReleaseCard from "../components/ReleaseCard"; // importamos el componente ReleaseCard para poder usarlo en el componente
 import LoadingOverlay from "../components/LoadingOverlay"; // importamos el componente LoadingOverlay para mostrar un mensaje de carga mientras se cargan los datos
 
-function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
+function ReleasesListPage({ query = "" }) { // esta funcion recibe el query como prop
   const [releases, setReleases] = useState([]);
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
-    axios
-      .get("https://spinsoul-json-server.onrender.com/releases")
-      .then((response) => {  // hacemos la petición a la API para traer los lanzamientos y guardarlos en el estado
-        setReleases(response.data);
-      })
-      .catch((error) => { // si tenemos un error, lo mostramos por console
+  useEffect(() => {
+    let mounted = true;
+
+    const loadReleases = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://spinsoul-json-server.onrender.com/releases"
+        );
+
+        if (mounted) {
+          setReleases(response.data);
+        }
+      } catch (error) {
         console.log(error);
-      });
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
+    loadReleases();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (loading) return <LoadingOverlay text="Loading records..." />;
@@ -25,9 +41,7 @@ function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
     axios
       .delete(`https://spinsoul-json-server.onrender.com/releases/${id}`)
       .then(() => {
-        setReleases((prev) =>
-          prev.filter((release) => release.id !== id)
-        );
+        setReleases((prev) => prev.filter((release) => release.id !== id));
       })
       .catch((error) => {
         console.log(error);
@@ -59,3 +73,4 @@ function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
 }
 
 export default ReleasesListPage;
+
