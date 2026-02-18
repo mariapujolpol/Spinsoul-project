@@ -13,7 +13,7 @@ function ReleasesListPage({query}) { // esta funcion recibe el query como prop
     const [selectedCountry, setSelectedCountry] = useState(""); // estado para el país seleccionado en el filtro
 
   useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
-  axios.get("https://spinsoul-json-server.onrender.com/releases")
+  axios.get("https://spinsoul-json-server.onrender.com/releases?_expand=artist")
     .then((response) => {  // hacemos la petición a la API para traer los lanzamientos y guardarlos en el estado
       setReleases(response.data);
     })
@@ -43,7 +43,8 @@ const filteredReleases = releases.filter((release) => {
     selectedGenre === "" || release.genre === selectedGenre;
 
   const matchesCountry =
-    selectedCountry === "" || release.country === selectedCountry;
+  selectedCountry === "" || release.artist?.country === selectedCountry;
+
 
   return matchesSearch && matchesGenre && matchesCountry;
 });
@@ -66,16 +67,19 @@ return ( // crea la estructura de la página
         </select>
 
         <select
-          onChange={(e) => setSelectedCountry(e.target.value)}
-          value={selectedCountry}
-        >
-          <option value="">Select Country</option>
-          <option value="United States">USA</option>
-          <option value="United Kingdom">UK</option>
-          <option value="France">France</option>
-          <option value="Iceland">Iceland</option>
-          
-        </select>
+  onChange={(e) => setSelectedCountry(e.target.value)}
+  value={selectedCountry}
+>
+  <option value="">Select Country</option>
+  <option value="USA">USA</option>
+  <option value="UK">UK</option>
+  <option value="France">France</option>
+  <option value="Iceland">Iceland</option>
+  <option value="Puerto Rico">Puerto Rico</option>
+</select>
+
+
+        
         <span>{filteredReleases.length} records</span>
       </div>
 
