@@ -2,69 +2,89 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ReleaseCard from "../components/ReleaseCard";
+import LoadingOverlay from "../components/LoadingOverlay";
 
-function HomePage({ query }) {
+function HomePage({ query = "" }) {
   const [artists, setArtists] = useState([]);
   const [releases, setReleases] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
 
   const handleReset = () => {
-  setSelectedGenre("");
-  setSelectedCountry("");
-};
+    setSelectedGenre("");
+    setSelectedCountry("");
+  };
 
   useEffect(() => {
-    axios
-      .get("https://spinsoul-json-server.onrender.com/artists")
-      .then((res) => setArtists(res.data))
-      .catch((err) => console.error(err));
+    let mounted = true;
 
-    axios
-      .get("https://spinsoul-json-server.onrender.com/releases")
-      .then((res) => setReleases(res.data))
-      .catch((err) => console.error(err));
+    const loadData = async () => {
+      try {
+        setLoading(true);
+
+        const [artistsRes, releasesRes] = await Promise.all([
+          axios.get("https://spinsoul-json-server.onrender.com/artists"),
+          axios.get("https://spinsoul-json-server.onrender.com/releases"),
+        ]);
+
+        if (mounted) {
+          setArtists(artistsRes.data);
+          setReleases(releasesRes.data);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
+    loadData();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
+  if (loading) return <LoadingOverlay text="Loading home..." />;
+
   const filteredReleases = releases.filter((release) => {
+    const matchesSearch = release.title
+      .toLowerCase()
+      .includes(query.toLowerCase());
 
-  const matchesSearch =
-    release.title.toLowerCase().includes(query?.toLowerCase() || "");
+    const matchesGenre = selectedGenre === "" || release.genre === selectedGenre;
 
-  const matchesGenre =
-    selectedGenre === "" || release.genre === selectedGenre;
-
-  const artist = artists.find(
-    (artist) => Number(artist.id) === release.artistId
-  );
-
-  const matchesCountry =
-    selectedCountry === "" || artist?.country === selectedCountry;
-
-  return matchesSearch && matchesGenre && matchesCountry;
-});
-const filteredArtists = artists.filter((artist) => {
-
-  const matchesSearch =
-    artist.name.toLowerCase().includes(query?.toLowerCase() || "");
-
-  const matchesCountry =
-    selectedCountry === "" || artist.country === selectedCountry;
-
-  const hasReleaseWithGenre =
-    selectedGenre === "" ||
-    releases.some(
-      (release) =>
-        release.artistId === Number(artist.id) &&
-        release.genre === selectedGenre
+    const artist = artists.find(
+      (artist) => Number(artist.id) === release.artistId
     );
 
-  return matchesSearch && matchesCountry && hasReleaseWithGenre;
-});
+    const matchesCountry =
+      selectedCountry === "" || artist?.country === selectedCountry;
 
-const suggestedReleases = filteredReleases.slice(0, 10);
-const suggestedArtists = filteredArtists.slice(0, 10);
+    return matchesSearch && matchesGenre && matchesCountry;
+  });
+
+  const filteredArtists = artists.filter((artist) => {
+    const matchesSearch = artist.name.toLowerCase().includes(query.toLowerCase());
+
+    const matchesCountry =
+      selectedCountry === "" || artist.country === selectedCountry;
+
+    const hasReleaseWithGenre =
+      selectedGenre === "" ||
+      releases.some(
+        (release) =>
+          release.artistId === Number(artist.id) &&
+          release.genre === selectedGenre
+      );
+
+    return matchesSearch && matchesCountry && hasReleaseWithGenre;
+  });
+
+  const suggestedReleases = filteredReleases.slice(0, 10);
+  const suggestedArtists = filteredArtists.slice(0, 10);
 
   return (
     <div className="page">
@@ -74,8 +94,7 @@ const suggestedArtists = filteredArtists.slice(0, 10);
             Discover the Sound <br /> of the World
           </h1>
           <p className="hero-text">
-            Build your vinyl dashboard: track releases, rate them, and explore
-            artists.
+            Build your vinyl dashboard: track releases, rate them, and explore artists.
           </p>
 
           <div className="hero-actions">
@@ -117,17 +136,11 @@ const suggestedArtists = filteredArtists.slice(0, 10);
               <option value="Puerto Rico">Puerto Rico</option>
             </select>
 
-            <Link
-              className="btn hero-btn-full"
-              to="/artists"
-              style={{ textDecoration: "none" }}
-            >
+            <Link className="btn hero-btn-full" to="/artists" style={{ textDecoration: "none" }}>
               Explore Artists
             </Link>
-            <button className="btn hero-btn-full"
-            onClick={handleReset}
-            style={{ textDecoration: "none" }}
-            >
+
+            <button className="btn hero-btn-full" onClick={handleReset}>
               Reset Filters
             </button>
           </div>
@@ -176,3 +189,4 @@ const suggestedArtists = filteredArtists.slice(0, 10);
 }
 
 export default HomePage;
+
