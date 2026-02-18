@@ -760,3 +760,91 @@ a{ color: inherit; }
     transform: rotate(360deg);
   }
 }
+
+/* =========================
+   MOBILE NAVBAR
+========================= */
+
+.menu-btn{
+  display: none;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  border-radius: 14px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.btn.btn-add{
+  white-space: nowrap;
+}
+
+/* Mobile layout */
+@media (max-width: 760px){
+  .menu-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav{
+    display: none; /* ocultamos links en mobile */
+  }
+
+  /* solo dejamos el icono del logo (opcional) */
+  .brand-text{
+    display: none;
+  }
+
+  /* toolbar: search crece, add se queda a la derecha */
+  .toolbar{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  /* si tu SearchBar tiene un wrapper, esta regla ayuda */
+  .toolbar .search,
+  .toolbar input{
+    min-width: 0;
+  }
+
+  /* el SearchBar ocupa el espacio disponible */
+  .toolbar > :first-child{
+    flex: 1;
+  }
+
+  /* botón add compacto */
+  .btn.btn-add{
+    padding: 10px 12px;
+  }
+}
+
+/* Dropdown menu */
+.mobile-menu{
+  position: fixed;
+  top: 74px; /* ajusta si tu topbar es más alto/bajo */
+  left: 16px;
+  right: 16px;
+  background: rgba(20,18,16,.98);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 10px;
+  z-index: 999;
+  box-shadow: 0 18px 45px rgba(0,0,0,.55);
+}
+
+.mobile-menu a{
+  display: block;
+  padding: 12px 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: rgba(255,255,255,.86);
+}
+
+.mobile-menu a:hover{
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.95);
+}

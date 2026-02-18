@@ -1,8 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
 import SearchBar from "./SearchBar";
 
 export default function Navbar({ query, setQuery, onAddRecord }) {
   const { pathname } = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isAddRecord = pathname.startsWith("/releases/new");
 
@@ -17,9 +19,18 @@ export default function Navbar({ query, setQuery, onAddRecord }) {
   return (
     <header className="topbar">
       <div className="topbar-inner">
+        {/* Mobile menu button */}
+        <button
+          className="menu-btn"
+          aria-label="Open menu"
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          ☰
+        </button>
+
         <div className="brand">
-          <span style={{ fontSize: 18 }}>◎</span>
-          <span style={{ fontSize: 18 }}>spinsoul</span>
+          <span className="brand-mark" style={{ fontSize: 18 }}>◎</span>
+          <span className="brand-text" style={{ fontSize: 18 }}>spinsoul</span>
         </div>
 
         <nav className="nav">
@@ -39,15 +50,26 @@ export default function Navbar({ query, setQuery, onAddRecord }) {
           )}
 
           {showAddButton && (
-            <button className="btn" onClick={onAddRecord}>
+            <button className="btn btn-add" onClick={onAddRecord}>
               ＋ Add Record
             </button>
           )}
         </div>
       </div>
+
+      {/* Mobile dropdown menu */}
+      {mobileOpen && (
+        <div className="mobile-menu" role="dialog" aria-label="Mobile menu">
+          <NavLink to="/" end onClick={() => setMobileOpen(false)}>Home</NavLink>
+          <NavLink to="/releases" onClick={() => setMobileOpen(false)}>Releases</NavLink>
+          <NavLink to="/artists" onClick={() => setMobileOpen(false)}>Artists</NavLink>
+          <NavLink to="/about" onClick={() => setMobileOpen(false)}>About</NavLink>
+        </div>
+      )}
     </header>
   );
 }
+
 
 
 // Importamos NavLink y useLocation de react-router-dom para crear un enlace a la página de detalles del artista
