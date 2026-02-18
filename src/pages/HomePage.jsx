@@ -20,7 +20,7 @@ function HomePage() {
   }, []);
 
  const suggestedReleases = useMemo(() => releases.slice(0, 10), [releases]);
-const suggestedArtists = useMemo(() => artists.slice(0, 8), [artists]);
+ const suggestedArtists = useMemo(() => artists.slice(0, 8), [artists]);
 
 
   return (
