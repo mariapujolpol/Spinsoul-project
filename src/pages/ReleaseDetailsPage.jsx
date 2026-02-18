@@ -55,7 +55,7 @@ export default function ReleaseDetailsPage() {
         { rating: newRating }
       );
 
-      // 🔥 Actualizamos el estado manualmente
+      //  Actualizamos el estado manualmente
       setRelease((prev) => ({
         ...prev,
         rating: newRating,

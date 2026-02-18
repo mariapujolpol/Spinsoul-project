@@ -6,15 +6,17 @@ function StarRating({ rating, onChange }) {         // exportamos el componente 
   return (
     <div className="star-container">
       {[1, 2, 3, 4, 5].map((star) => (
-        <span
-          key={star}
-          className={`star ${star <= (hover || rating) ? "active" : ""}`}
-          onClick={() => onChange(star)}
-          onMouseEnter={() => setHover(star)}
-          onMouseLeave={() => setHover(null)}
-        >
-          ★
-        </span>
+       <button
+  key={star}
+  type="button"
+  className={`star ${star <= (hover || rating) ? "active" : ""}`}
+  onClick={() => onChange(star)}
+  onMouseEnter={() => setHover(star)}
+  onMouseLeave={() => setHover(null)}
+>
+  ★
+</button>
+
       ))}
     </div>
   );
