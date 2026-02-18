@@ -7,7 +7,7 @@ import ReleaseCard from '../components/ReleaseCard';
 
 
 
-function ArtistsListPage() {
+function ArtistsListPage({query}) { //para recibir el query como prop
     const [artists, setArtists] = useState([]);
 
     useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
@@ -21,19 +21,20 @@ function ArtistsListPage() {
         
     }, []);
   
-    const filteredArtists = artists.filter((artist) =>
-  artist.name.toLowerCase().includes(query?.toLowerCase() || "")
+  const filteredArtists = artists.filter((artist) =>
+  artist.name.toLowerCase().includes(query?.toLowerCase() || "") // usamos el query para filtrar los artistas por nombre 
 );
 
 
 return (
     <div className="page">
       <div className="meta-row">
-        <span>{artists.length} artists</span>
+        <span>{filteredArtists.length} artists</span>
+
       </div>
 
-      <div className="grid">
-        {artists.map((artist) => (
+       <div className="grid">
+        {filteredArtists.map((artist) => (
           <ArtistCard key={artist.id} artist={artist} />
         ))}
       </div>
