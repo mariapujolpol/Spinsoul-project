@@ -2,6 +2,7 @@ import  {useState, useEffect} from 'react';
 import axios from 'axios'
 import ArtistCard from '../components/ArtistCard';
 import ReleaseCard from '../components/ReleaseCard';
+import LoadingOverlay from "../components/LoadingOverlay";
 
 
 
@@ -20,6 +21,11 @@ function ArtistsListPage({query}) { //para recibir el query como prop
         });
         
     }, []);
+
+    if (loading) return <LoadingOverlay text="Loading artists..." />;
+
+
+
   
   const filteredArtists = artists.filter((artist) =>
   artist.name.toLowerCase().includes(query?.toLowerCase() || "") // usamos el query para filtrar los artistas por nombre 

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReleaseCard from "../components/ReleaseCard"; // importamos el componente ReleaseCard para poder usarlo en el componente
+import LoadingOverlay from "../components/LoadingOverlay"; // importamos el componente LoadingOverlay para mostrar un mensaje de carga mientras se cargan los datos
 
 function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
   const [releases, setReleases] = useState([]);
@@ -16,6 +17,8 @@ function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
         console.log(error);
       });
   }, []);
+
+  if (loading) return <LoadingOverlay text="Loading records..." />;
 
   const handleDelete = (id) => { // esta funcion recibe el id del lanzamiento que queremos eliminar
     axios
