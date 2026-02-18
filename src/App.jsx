@@ -30,8 +30,9 @@ export default function App() {
       <Navbar query={query} setQuery={setQuery} onAddRecord={handleAddRecord} /> {/* Aquí pasamos el query y la función para actualizarlo al Navbar para que pueda manejar la búsqueda */}
 
       <Routes> {/* Aquí definimos las rutas de nuestra aplicación con React Router para cada una de las vistas */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/" element={<HomePage query={query} />} />
+        
+       <Route path="/" element={<HomePage query={query} />} />
+
 
 
         <Route path="/releases" element={<ReleasesListPage query={query} />} />

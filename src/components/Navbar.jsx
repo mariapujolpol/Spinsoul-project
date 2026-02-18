@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 export default function Navbar({ query, setQuery, onAddRecord }) {
   const { pathname } = useLocation();
 
-  const isAddRecord = pathname.startsWith("/add-record");
+  const isAddRecord = pathname.startsWith("/releases/new");
 
   const showToolbarPages =
     pathname === "/" ||
@@ -34,7 +34,7 @@ export default function Navbar({ query, setQuery, onAddRecord }) {
             <SearchBar
               value={query}
               onChange={setQuery}
-              placeholder="Search records..."
+              placeholder="Search..."
             />
           )}
 
