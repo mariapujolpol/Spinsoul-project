@@ -6,6 +6,7 @@ import LoadingOverlay from "../components/LoadingOverlay"; // importamos el comp
 
 function ReleasesListPage({ query }) { // esta funcion recibe el query como prop
   const [releases, setReleases] = useState([]);
+   const [loading, setLoading] = useState(true);
 
   useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
     axios

@@ -10,6 +10,7 @@ import LoadingOverlay from "../components/LoadingOverlay";
 
 function ArtistsListPage({query}) { //para recibir el query como prop
     const [artists, setArtists] = useState([]);
+     const [loading, setLoading] = useState(true);
 
     useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
         axios.get ("https://spinsoul-json-server.onrender.com/artists") // ponemos el url de la API que nos da el backend para traer los artistas
