@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import StarRating from "../components/StarRating";
 
 export default function ReleaseDetailsPage() {
   const { releaseId } = useParams();
@@ -45,12 +46,21 @@ export default function ReleaseDetailsPage() {
             {release.genre || ""}
           </p>
 
-          <p style={{ margin: "10px 0 0" }}>
-            <span className="stars">
-              {"★".repeat(release.rating ?? 0)}
-              {"☆".repeat(5 - (release.rating ?? 0))}
-            </span>
-          </p>
+          <StarRating
+  rating={release.rating ?? 0}
+  onChange={async (newRating) => {
+    try {
+      const res = await axios.patch(
+        `https://spinsoul-json-server.onrender.com/releases/${releaseId}`,
+        { rating: newRating }
+      );
+      setRelease(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }}
+/>
+
 
           {release.review && <p className="details-text">{release.review}</p>}
 

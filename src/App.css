@@ -177,7 +177,26 @@ a{ color: inherit; }
   font-size: 13px;
 }
 
-.stars{
-  color: var(--brand);
-  letter-spacing: 1px;
+
+.star-container {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
 }
+
+.star {
+  font-size: 22px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.star.active {
+  color: var(--brand);
+  text-shadow: 0 0 8px rgba(245,166,35,.35);
+}
+
+.star:hover {
+  transform: scale(1.18);
+}
+
