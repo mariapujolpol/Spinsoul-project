@@ -17,6 +17,7 @@ function AddRecordPage() {
   });
 
   const [isSaving, setIsSaving] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,11 +41,19 @@ function AddRecordPage() {
     };
 
     try {
+      setErrorMsg("");
       setIsSaving(true);
-      await axios.post(API_URL, newRecord);
+
+      await axios.post(API_URL, newRecord, {
+        timeout: 15000, // evita que se quede pegado
+      });
+
       navigate("/releases");
     } catch (error) {
       console.log(error);
+      setErrorMsg("Couldn’t save the record. Please try again.");
+    } finally {
+      // SIEMPRE se apaga (si navegaste, el componente se desmonta igual)
       setIsSaving(false);
     }
   };
@@ -69,6 +78,12 @@ function AddRecordPage() {
           </div>
 
           <form className="form" onSubmit={handleSubmit}>
+            {errorMsg && (
+              <div style={{ marginBottom: 12, opacity: 0.85 }}>
+                {errorMsg}
+              </div>
+            )}
+
             <div className="field">
               <label className="label">
                 Title <span className="required">*</span>
@@ -155,11 +170,7 @@ function AddRecordPage() {
                 Cancel
               </Link>
 
-              <button
-                className="btn-primary"
-                type="submit"
-                disabled={isSaving}
-              >
+              <button className="btn-primary" type="submit" disabled={isSaving}>
                 {isSaving ? (
                   <>
                     <span className="spinner-sm" />

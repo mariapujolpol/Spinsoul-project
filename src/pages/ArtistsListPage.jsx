@@ -1,54 +1,58 @@
-import  {useState, useEffect} from 'react';
-import axios from 'axios'
-import ArtistCard from '../components/ArtistCard';
-import ReleaseCard from '../components/ReleaseCard';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ArtistCard from "../components/ArtistCard";
 import LoadingOverlay from "../components/LoadingOverlay";
 
+function ArtistsListPage({ query = "" }) {
+  const [artists, setArtists] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    let mounted = true;
 
+    const loadArtists = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://spinsoul-json-server.onrender.com/artists"
+        );
 
+        if (mounted) {
+          setArtists(response.data);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
 
-function ArtistsListPage({query}) { //para recibir el query como prop
-    const [artists, setArtists] = useState([]);
-     const [loading, setLoading] = useState(true);
+    loadArtists();
 
-    useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
-        axios.get ("https://spinsoul-json-server.onrender.com/artists") // ponemos el url de la API que nos da el backend para traer los artistas
-        .then((response) => {
-            setArtists(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-        
-    }, []);
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
-    if (loading) return <LoadingOverlay text="Loading artists..." />;
+  if (loading) return <LoadingOverlay text="Loading artists..." />;
 
-
-
-  
   const filteredArtists = artists.filter((artist) =>
-  artist.name.toLowerCase().includes(query?.toLowerCase() || "") // usamos el query para filtrar los artistas por nombre 
-);
+    artist.name.toLowerCase().includes(query.toLowerCase())
+  );
 
-
-return (
+  return (
     <div className="page">
       <div className="meta-row">
         <span>{filteredArtists.length} artists</span>
-
       </div>
 
-       <div className="grid">
+      <div className="grid">
         {filteredArtists.map((artist) => (
           <ArtistCard key={artist.id} artist={artist} />
         ))}
       </div>
     </div>
-)
+  );
 }
-export default ArtistsListPage;
 
-// here we are using the useState to set the state of the component and
-// the useEffect to fetch the data from the API and set the state of the component with the data we get from the API.
+export default ArtistsListPage;
