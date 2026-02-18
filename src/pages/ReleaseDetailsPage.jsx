@@ -15,7 +15,7 @@ export default function ReleaseDetailsPage() {
         setLoading(true);
         setError("");
 
-        const res = await axios.get(`http://localhost:5005/releases/${releaseId}`);
+        const res = await axios.get(`https://spinsoul-json-server.onrender.com/releases/${releaseId}`);
         setRelease(res.data);
       } catch (err) {
         console.error(err);

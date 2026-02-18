@@ -10,12 +10,12 @@ function HomePage() {
   useEffect(() => {
     // usamos el useEffect para ejecutar el código cuando el componente se monta
     axios
-      .get("http://localhost:5005/artists") // usamos axios para hacer la petición a la API para traer los artistas y guardarlos en el estado
+      .get("https://spinsoul-json-server.onrender.com/artists") // usamos axios para hacer la petición a la API para traer los artistas y guardarlos en el estado
       .then((res) => setArtists(res.data))
       .catch((err) => console.error(err));
 
     axios
-      .get("http://localhost:5005/releases") // y aqui hacemos lo mismo para los lanzamientos (releases)
+      .get("https://spinsoul-json-server.onrender.com/releases") // y aqui hacemos lo mismo para los lanzamientos (releases)
       .then((res) => setReleases(res.data))
       .catch((err) => console.error(err));
   }, []);

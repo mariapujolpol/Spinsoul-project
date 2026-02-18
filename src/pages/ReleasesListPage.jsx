@@ -10,7 +10,7 @@ function ReleasesListPage({query}) { // esta funcion recibe el query como prop
     const [releases, setReleases] = useState([]);
 
   useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
-  axios.get("http://localhost:5005/releases")
+  axios.get("https://spinsoul-json-server.onrender.com/releases")
     .then((response) => {  // hacemos la petición a la API para traer los lanzamientos y guardarlos en el estado
       setReleases(response.data);
     })
@@ -20,7 +20,7 @@ function ReleasesListPage({query}) { // esta funcion recibe el query como prop
 }, []);
 
 const handleDelete = (id) => { // esta funcion recibe el id del lanzamiento que queremos eliminar en este caso en releases, hacemos una petición a la API para eliminar el lanzamiento de la base de datos y luego actualizamos el estado para eliminarlo de la lista de lanzamientos que se muestra en pantalla
-  axios.delete(`http://localhost:5005/releases/${id}`)
+  axios.delete(`https://spinsoul-json-server.onrender.com/releases/${id}`)
     .then(() => {
       setReleases((prev) =>
         prev.filter((release) => release.id !== id)

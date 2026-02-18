@@ -10,7 +10,7 @@ function ArtistsListPage() {
     const [artists, setArtists] = useState([]);
 
     useEffect(() => {  // hicimos un useEffect para ejecutar el código cuando el componente se monta
-        axios.get ("http://localhost:5005/artists") // ponemos el url de la API que nos da el backend para traer los artistas
+        axios.get ("https://spinsoul-json-server.onrender.com/artists") // ponemos el url de la API que nos da el backend para traer los artistas
         .then((response) => {
             setArtists(response.data);
         })
