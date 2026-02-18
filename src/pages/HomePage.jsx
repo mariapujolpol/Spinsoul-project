@@ -10,6 +10,11 @@ function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
 
+  const handleReset = () => {
+  setSelectedGenre("");
+  setSelectedCountry("");
+};
+
   useEffect(() => {
     axios
       .get("https://spinsoul-json-server.onrender.com/artists")
@@ -118,6 +123,11 @@ const suggestedArtists = filteredArtists.slice(0, 10);
             >
               Explore Artists
             </Link>
+            <button className="btn hero-btn-full"
+            onClick={handleReset}
+            >
+              Reset Filters
+            </button>
           </div>
         </div>
       </section>
