@@ -31,6 +31,8 @@ export default function App() {
 
       <Routes> {/* Aquí definimos las rutas de nuestra aplicación con React Router para cada una de las vistas */}
         <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage query={query} />} />
+
 
         <Route path="/releases" element={<ReleasesListPage query={query} />} />
 

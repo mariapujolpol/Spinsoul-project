@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import ReleaseCard from "../components/ReleaseCard";
 
-function HomePage() {
+function HomePage({ query }) {
   const [artists, setArtists] = useState([]);
   const [releases, setReleases] = useState([]);
 
@@ -29,20 +29,25 @@ function HomePage() {
 
   const filteredReleases = releases.filter((release) => {
 
-    const matchesGenre =
-      selectedGenre === "" || release.genre === selectedGenre;
+  const matchesSearch =
+    release.title.toLowerCase().includes(query?.toLowerCase() || "");
 
-    const artist = artists.find(
-      (artist) => Number(artist.id) === release.artistId
-    );
+  const matchesGenre =
+    selectedGenre === "" || release.genre === selectedGenre;
 
-    const matchesCountry =
-      selectedCountry === "" || artist?.country === selectedCountry;
+  const artist = artists.find(
+    (artist) => Number(artist.id) === release.artistId
+  );
 
-    return matchesGenre && matchesCountry;
-  });
+  const matchesCountry =
+    selectedCountry === "" || artist?.country === selectedCountry;
 
-  const filteredArtists = artists.filter((artist) => {
+  return matchesSearch && matchesGenre && matchesCountry;
+});
+const filteredArtists = artists.filter((artist) => {
+
+  const matchesSearch =
+    artist.name.toLowerCase().includes(query?.toLowerCase() || "");
 
   const matchesCountry =
     selectedCountry === "" || artist.country === selectedCountry;
@@ -55,8 +60,9 @@ function HomePage() {
         release.genre === selectedGenre
     );
 
-  return matchesCountry && hasReleaseWithGenre;
+  return matchesSearch && matchesCountry && hasReleaseWithGenre;
 });
+
 
 
 
