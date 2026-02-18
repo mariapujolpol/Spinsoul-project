@@ -848,3 +848,34 @@ a{ color: inherit; }
   background: rgba(255,255,255,.06);
   color: rgba(255,255,255,.95);
 }
+
+/* FIX: hero filters se salen del hero-card en móvil */
+@media (max-width: 760px){
+  .hero-card{
+    width: 100%;
+    overflow: hidden; /* evita que los bordes se “salgan” visualmente */
+  }
+
+  /* que las columnas se apilen */
+  .hero-left,
+  .hero-right{
+    width: 100%;
+    min-width: 0;       /* CLAVE: permite que encoja */
+    flex: 1 1 100%;
+  }
+
+  /* el panel de filtros debe caber dentro */
+  .hero-filters{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* selects y botones al 100% sin overflow */
+  .hero-filters .select,
+  .hero-filters .btn.hero-btn-full{
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
