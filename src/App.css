@@ -177,26 +177,24 @@ a{ color: inherit; }
   font-size: 13px;
 }
 
-
 .star-container {
   display: flex;
-  gap: 8px;
-  margin: 12px 0;
+  gap: 6px;
+  margin: 10px 0;
 }
 
 .star {
-  font-size: 22px;
-  color: var(--muted);
+  font-size: 18px;
+  color: rgba(255,255,255,0.25);
   cursor: pointer;
   transition: transform 0.15s ease, color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .star.active {
   color: var(--brand);
-  text-shadow: 0 0 8px rgba(245,166,35,.35);
+  text-shadow: 0 0 10px rgba(245,166,35,.6);
 }
 
 .star:hover {
-  transform: scale(1.18);
+  transform: scale(1.25);
 }
-
