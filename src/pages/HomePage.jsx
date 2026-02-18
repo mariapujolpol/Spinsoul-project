@@ -37,8 +37,28 @@ function HomePage() {
     return matchesGenre && matchesCountry;
   });
 
-  const suggestedReleases = filteredReleases.slice(0, 10);
-  const suggestedArtists = artists.slice(0, 10);
+  const filteredArtists = artists.filter((artist) => {
+
+  const matchesCountry =
+    selectedCountry === "" || artist.country === selectedCountry;
+
+  const hasReleaseWithGenre =
+    selectedGenre === "" ||
+    releases.some(
+      (release) =>
+        release.artistId === Number(artist.id) &&
+        release.genre === selectedGenre
+    );
+
+  return matchesCountry && hasReleaseWithGenre;
+});
+
+
+
+
+
+const suggestedReleases = filteredReleases.slice(0, 10);
+const suggestedArtists = filteredArtists.slice(0, 10);
 
   return (
     <div className="page">
