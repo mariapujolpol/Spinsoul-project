@@ -63,11 +63,6 @@ const filteredArtists = artists.filter((artist) => {
   return matchesSearch && matchesCountry && hasReleaseWithGenre;
 });
 
-
-
-
-
-
 const suggestedReleases = filteredReleases.slice(0, 10);
 const suggestedArtists = filteredArtists.slice(0, 10);
 
