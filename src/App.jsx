@@ -34,7 +34,7 @@ export default function App() {
 
         <Route path="/releases" element={<ReleasesListPage query={query} />} />
 
-        <Route path="/artists" element={<ArtistsListPage />} />
+        <Route path="/artists" element={<ArtistsListPage query={query}/>} />
         <Route path="/artists/:artistId" element={<ArtistDetailsPage />} />
 
         <Route path="/about" element={<AboutPage />} />
