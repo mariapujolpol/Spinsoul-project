@@ -22,8 +22,9 @@ function ArtistsListPage() {
     }, []);
   
     const filteredArtists = artists.filter((artist) =>
-    artist.title.toLowerCase().includes(query.toLowerCase())
-  );
+  artist.name.toLowerCase().includes(query?.toLowerCase() || "")
+);
+
 
 return (
     <div className="page">
