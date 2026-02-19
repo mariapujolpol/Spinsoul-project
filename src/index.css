@@ -912,4 +912,27 @@ a{ color: inherit; }
 .delete-btn:hover {
   background: #e74c3c;
   transform: scale(1.12);
+  
+}
+
+.delete-tooltip {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #111;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+}
+
+.delete-btn:hover .delete-tooltip {
+  opacity: 1;
 }
