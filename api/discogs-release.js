@@ -77,6 +77,7 @@ export default async function handler(req, res) {
       genres,
       styles,
       coverUrl,
+      review,
 
       // útil para debug / UI
       country: data.country || "",
