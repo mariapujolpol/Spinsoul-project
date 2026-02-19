@@ -15,6 +15,7 @@ function AddRecordPage() {
     year: "",
     coverUrl: "",
     rating: 0,
+    review: "",
   });
 
   const [isSaving, setIsSaving] = useState(false);
@@ -52,6 +53,7 @@ function AddRecordPage() {
       year: form.year ? Number(form.year) : null,
       coverUrl: form.coverUrl.trim(),
       rating: Number(form.rating) || 0,
+      review: form.review.trim(),
     };
 
     try {
@@ -178,6 +180,18 @@ function AddRecordPage() {
                 value={form.coverUrl}
                 onChange={handleChange}
                 disabled={isSaving}
+              />
+            </div>
+            <div className="field">
+              <label className="label">Description</label>
+              <textarea
+                className="input"
+                name="review"
+                placeholder="Short description..."
+                value={form.review}
+                onChange={handleChange}
+                disabled={isSaving}
+                rows={3}
               />
             </div>
 

@@ -59,6 +59,7 @@ export default function ImportDiscogsPage() {
         year: data.year || "",
         genre,
         coverUrl: data.coverUrl || "",
+        review: data.review || "",
       };
 
       navigate("/releases/new", { state: mapped });
