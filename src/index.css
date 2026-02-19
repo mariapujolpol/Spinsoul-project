@@ -936,3 +936,19 @@ a{ color: inherit; }
 .delete-btn:hover .delete-tooltip {
   opacity: 1;
 }
+
+.rating-label {
+  font-weight: 600;
+  margin-top: 6px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.rating-1 { color: #777; }
+.rating-2 { color: #999; }
+.rating-3 { color: #f5a623; }
+.rating-4 { color: #ffd27a; }
+.rating-5 { 
+  color: gold;
+  text-shadow: 0 0 8px rgba(255,215,0,0.6);
+}

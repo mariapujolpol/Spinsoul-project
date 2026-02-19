@@ -10,6 +10,23 @@ export default function ReleaseDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+   const getRatingLabel = (rating) => {
+    switch (rating) {
+      case 1:
+        return "Noise";
+      case 2:
+        return "Skip";
+      case 3:
+        return "Okay...";
+      case 4:
+        return "Classic";
+      case 5:
+        return "LEGENDARY";
+      default:
+        return "Unrated";
+    }
+  };
+
   useEffect(() => {
     async function fetchRelease() {
       try {
@@ -66,7 +83,11 @@ export default function ReleaseDetailsPage() {
     }
   }}
 />
-<p>Rating: {release.rating}</p>
+<p className={`rating-label rating-${release.rating ?? 0}`}>
+  {getRatingLabel(release.rating ?? 0)}
+</p>
+
+
 
 
  
