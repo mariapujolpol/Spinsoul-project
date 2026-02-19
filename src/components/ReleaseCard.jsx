@@ -8,10 +8,10 @@ export default function ReleaseCard({ release, onDelete }) { // esta funcion exp
       {onDelete && ( // si se proporciona la función onDelete, mostramos un botón de eliminar en la esquina superior derecha de la tarjeta en releases
         <button
           className="delete-btn"
-          title= "Delete release"
           onClick={() => onDelete(release.id)}
         >
           ✖
+          <span className="tooltip">Delete release</span>
         </button>
       )}
 
