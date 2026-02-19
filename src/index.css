@@ -135,6 +135,7 @@ a{ color: inherit; }
   overflow:hidden;
   box-shadow: 0 1px 0 rgba(255,255,255,.04);
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  position: relative; /* necesario para posicionar el botón de eliminar en releases */
 }
 .card:hover{
   transform: translateY(-3px);
@@ -884,6 +885,7 @@ a{ color: inherit; }
   position: absolute;
   top: 12px;
   right: 12px;
+  position: absolute;
 
   width: 30px;
   height: 30px;
@@ -910,4 +912,25 @@ a{ color: inherit; }
 .delete-btn:hover {
   background: #e74c3c;
   transform: scale(1.12);
+}
+
+.delete-tooltip {
+  position: absolute;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #111;
+  color: white;
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 4px;
+
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.delete-btn:hover .delete-tooltip {
+  opacity: 1;
 }

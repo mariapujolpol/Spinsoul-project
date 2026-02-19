@@ -11,7 +11,7 @@ export default function ReleaseCard({ release, onDelete }) { // esta funcion exp
           onClick={() => onDelete(release.id)}
         >
           ✖
-          <span className="tooltip">Delete release</span>
+          <span className="tooltip">Delete release</span> {/* tooltip que aparece al hacer hover sobre el botón de eliminar */}
         </button>
       )}
 
