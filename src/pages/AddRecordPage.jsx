@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const API_URL = "https://spinsoul-json-server.onrender.com/releases";
 
 function AddRecordPage() {
   const navigate = useNavigate();
+  const location = useLocation(); // 👈 nuevo
 
   const [form, setForm] = useState({
     title: "",
@@ -18,6 +19,19 @@ function AddRecordPage() {
 
   const [isSaving, setIsSaving] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  // 👇 nuevo: prefill desde /releases/import
+  useEffect(() => {
+    if (!location.state) return;
+
+    setForm((prev) => ({
+      ...prev,
+      ...location.state, // { title, artist, year, genre, coverUrl }
+    }));
+
+    // Limpia el state para que no se re-aplique al refrescar
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.state]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +59,7 @@ function AddRecordPage() {
       setIsSaving(true);
 
       await axios.post(API_URL, newRecord, {
-        timeout: 15000, // evita que se quede pegado
+        timeout: 15000,
       });
 
       navigate("/releases");
@@ -53,7 +67,6 @@ function AddRecordPage() {
       console.log(error);
       setErrorMsg("Couldn’t save the record. Please try again.");
     } finally {
-      // SIEMPRE se apaga (si navegaste, el componente se desmonta igual)
       setIsSaving(false);
     }
   };
@@ -78,10 +91,19 @@ function AddRecordPage() {
           </div>
 
           <form className="form" onSubmit={handleSubmit}>
+            <div style={{ marginBottom: 16 }}>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => navigate("/releases/import")}
+                disabled={isSaving}
+                style={{ width: "100%" }}
+              >
+                Import from Discogs
+              </button>
+            </div>
             {errorMsg && (
-              <div style={{ marginBottom: 12, opacity: 0.85 }}>
-                {errorMsg}
-              </div>
+              <div style={{ marginBottom: 12, opacity: 0.85 }}>{errorMsg}</div>
             )}
 
             <div className="field">

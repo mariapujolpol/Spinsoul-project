@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import Footer from "./components/Footer";
 import AddRecordPage from "./pages/AddRecordPage.jsx";
 import ArtistDetailsPage from "./pages/ArtistDetailsPage.jsx";
+import ImportDiscogsPage from "./pages/ImportDiscogsPage";
 
 
 export default function App() {
@@ -43,7 +44,7 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
 
         <Route path="/releases/:releaseId" element={<ReleaseDetailsPage />} />
-
+        <Route path="/releases/import" element={<ImportDiscogsPage />} />
 
         <Route path="/releases/new" element={<AddRecordPage />} />
 
