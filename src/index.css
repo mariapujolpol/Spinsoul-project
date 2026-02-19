@@ -132,7 +132,7 @@ a{ color: inherit; }
   background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow:hidden;
+  overflow:visible;
   box-shadow: 0 1px 0 rgba(255,255,255,.04);
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
   
@@ -912,7 +912,7 @@ a{ color: inherit; }
 .delete-btn:hover {
   background: #e74c3c;
   transform: scale(1.12);
-  
+
 }
 
 .delete-tooltip {
