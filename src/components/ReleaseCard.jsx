@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"; // importamos Link de react-router-dom para crear enlaces a otras páginas dentro de nuestra aplicación
+import StarRating from "./StarRating";
 
 export default function ReleaseCard({ release, onDelete }) { // esta funcion exporta el componente ReleaseCard, que recibe un objeto release con la información del lanzamiento y una función onDelete para eliminar el lanzamiento (si se proporciona)
   return (
