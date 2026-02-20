@@ -34,13 +34,9 @@ Technologies, Libraries & APIs used
 
 Backlog Functionalities
 ----------------------
-- User authentication (login/signup)
-- Favorites system for releases
-- Pagination for large datasets
+
 - Server-side filtering instead of client-side filtering
 - Edit release functionality
-- Dark/Light theme toggle
-- Real backend database (MongoDB / PostgreSQL)
 - Rate limiting and caching for Discogs API
 - Sorting options (year, rating, alphabetical)
 - Artist image fallback handling
