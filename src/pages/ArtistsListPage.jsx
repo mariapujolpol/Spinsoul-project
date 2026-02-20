@@ -9,7 +9,6 @@ import LoadingOverlay from "../components/LoadingOverlay";
 // 3) Displays a list of ArtistCard components
 
 function ArtistsListPage({ query = "" }) {
-
   // ------------------------------------------------------------
   // LOCAL STATE
   // ------------------------------------------------------------
@@ -20,12 +19,10 @@ function ArtistsListPage({ query = "" }) {
   // Controls loading overlay visibility
   const [loading, setLoading] = useState(true);
 
-
   // ------------------------------------------------------------
   // FETCH ARTISTS ON COMPONENT MOUNT
   // ------------------------------------------------------------
   useEffect(() => {
-
     // Safety flag to prevent state update if component unmounts
     let mounted = true;
 
@@ -35,14 +32,13 @@ function ArtistsListPage({ query = "" }) {
 
         // Request all artists from backend
         const response = await axios.get(
-          "`${import.meta.env.VITE_SERVER_URL}`/artists",
+          `${import.meta.env.VITE_SERVER_URL}/artists`,
         );
 
         // Only update state if component is still mounted
         if (mounted) {
           setArtists(response.data);
         }
-
       } catch (error) {
         console.log(error);
       } finally {
@@ -57,15 +53,12 @@ function ArtistsListPage({ query = "" }) {
     return () => {
       mounted = false;
     };
-
   }, []); // Empty dependency array → runs only once
-
 
   // ------------------------------------------------------------
   // LOADING STATE
   // ------------------------------------------------------------
   if (loading) return <LoadingOverlay text="Loading artists..." />;
-
 
   // ------------------------------------------------------------
   // CLIENT-SIDE FILTERING
