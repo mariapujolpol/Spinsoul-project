@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const API_URL = "https://spinsoul-json-server.onrender.com/releases";
+const API_URL = "`${import.meta.env.VITE_SERVER_URL}`/releases";
 
 function AddRecordPage() {
   const navigate = useNavigate();

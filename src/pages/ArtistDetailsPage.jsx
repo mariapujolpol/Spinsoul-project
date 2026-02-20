@@ -18,10 +18,10 @@ export default function ArtistDetailsPage() {
 
         // Trae artista + releases relacionados
         const artistRes = await axios.get(
-          `https://spinsoul-json-server.onrender.com/artists/${artistId}`,
+          `${import.meta.env.VITE_SERVER_URL}/artists/${artistId}`,
         );
         const releasesRes = await axios.get(
-          `https://spinsoul-json-server.onrender.com/releases?artistId=${artistId}`,
+          `${import.meta.env.VITE_SERVER_URL}/releases?artistId=${artistId}`,
         );
 
         setArtist({

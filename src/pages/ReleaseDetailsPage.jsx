@@ -33,7 +33,7 @@ export default function ReleaseDetailsPage() {
         setLoading(true);
         setError("");
 
-        const res = await axios.get(`https://spinsoul-json-server.onrender.com/releases/${releaseId}`);
+        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/releases/${releaseId}`);
         setRelease(res.data);
       } catch (err) {
         console.error(err);
@@ -68,7 +68,7 @@ export default function ReleaseDetailsPage() {
   onChange={async (newRating) => {
     try {
       await axios.patch(
-        `https://spinsoul-json-server.onrender.com/releases/${releaseId}`,
+        `${import.meta.env.VITE_SERVER_URL}/releases/${releaseId}`,
         { rating: newRating }
       );
 

@@ -14,8 +14,7 @@ function ReleasesListPage({ query = "" }) { // esta funcion recibe el query como
     const loadReleases = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://spinsoul-json-server.onrender.com/releases"
+        const response = await axios.get( `${import.meta.env.VITE_SERVER_URL}/releases"`
         );
 
         if (mounted) {
@@ -39,7 +38,7 @@ function ReleasesListPage({ query = "" }) { // esta funcion recibe el query como
 
   const handleDelete = (id) => { // esta funcion recibe el id del lanzamiento que queremos eliminar
     axios
-      .delete(`https://spinsoul-json-server.onrender.com/releases/${id}`)
+      .delete(`${import.meta.env.VITE_SERVER_URL}/releases/${id}`)
       .then(() => {
         setReleases((prev) => prev.filter((release) => release.id !== id));
       })

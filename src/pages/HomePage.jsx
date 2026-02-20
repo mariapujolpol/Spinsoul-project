@@ -25,8 +25,8 @@ function HomePage({ query = "" }) {
         setLoading(true);
 
         const [artistsRes, releasesRes] = await Promise.all([
-          axios.get("https://spinsoul-json-server.onrender.com/artists"),
-          axios.get("https://spinsoul-json-server.onrender.com/releases"),
+          axios.get("`${import.meta.env.VITE_SERVER_URL}`/artists"),
+          axios.get("`${import.meta.env.VITE_SERVER_URL}`/releases"),
         ]);
 
         if (mounted) {

@@ -14,7 +14,7 @@ function ArtistsListPage({ query = "" }) {
       try {
         setLoading(true);
         const response = await axios.get(
-          "https://spinsoul-json-server.onrender.com/artists"
+          "`${import.meta.env.VITE_SERVER_URL}`/artists"
         );
 
         if (mounted) {
