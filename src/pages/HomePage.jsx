@@ -4,19 +4,30 @@ import { Link } from "react-router-dom";
 import ReleaseCard from "../components/ReleaseCard";
 import LoadingOverlay from "../components/LoadingOverlay";
 
+// Home page = combined explorer
+// It loads BOTH artists and releases and filters them together
+
 function HomePage({ query = "" }) {
+  // ------------------------------------------------------------
+  // DATA STATE
+  // ------------------------------------------------------------
   const [artists, setArtists] = useState([]);
   const [releases, setReleases] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // FILTER STATE
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
 
+  // Reset filters
   const handleReset = () => {
     setSelectedGenre("");
     setSelectedCountry("");
   };
 
+  // ------------------------------------------------------------
+  // LOAD BOTH COLLECTIONS ONCE
+  // ------------------------------------------------------------
   useEffect(() => {
     let mounted = true;
 
@@ -24,6 +35,7 @@ function HomePage({ query = "" }) {
       try {
         setLoading(true);
 
+        // Parallel requests (faster than sequential)
         const [artistsRes, releasesRes] = await Promise.all([
           axios.get("`${import.meta.env.VITE_SERVER_URL}`/artists"),
           axios.get("`${import.meta.env.VITE_SERVER_URL}`/releases"),
@@ -50,16 +62,21 @@ function HomePage({ query = "" }) {
   if (loading) return <LoadingOverlay text="Loading home..." />;
 
   const filteredReleases = releases.filter((release) => {
+    // Search by release title
     const matchesSearch = release.title
       .toLowerCase()
       .includes(query.toLowerCase());
 
-    const matchesGenre = selectedGenre === "" || release.genre === selectedGenre;
+    // Genre filter
+    const matchesGenre =
+      selectedGenre === "" || release.genre === selectedGenre;
 
+    // Find the artist that owns this release
     const artist = artists.find(
-      (artist) => Number(artist.id) === release.artistId
+      (artist) => Number(artist.id) === release.artistId,
     );
 
+    // Country filter depends on the related artist
     const matchesCountry =
       selectedCountry === "" || artist?.country === selectedCountry;
 
@@ -67,17 +84,22 @@ function HomePage({ query = "" }) {
   });
 
   const filteredArtists = artists.filter((artist) => {
-    const matchesSearch = artist.name.toLowerCase().includes(query.toLowerCase());
+    // Name search
+    const matchesSearch = artist.name
+      .toLowerCase()
+      .includes(query.toLowerCase());
 
+    // Country filter
     const matchesCountry =
       selectedCountry === "" || artist.country === selectedCountry;
 
+    // Artist must have at least one release with selected genre
     const hasReleaseWithGenre =
       selectedGenre === "" ||
       releases.some(
         (release) =>
           release.artistId === Number(artist.id) &&
-          release.genre === selectedGenre
+          release.genre === selectedGenre,
       );
 
     return matchesSearch && matchesCountry && hasReleaseWithGenre;
@@ -94,15 +116,24 @@ function HomePage({ query = "" }) {
             Discover the Sound <br /> of the World
           </h1>
           <p className="hero-text">
-            Build your vinyl dashboard: track releases, rate them, and explore artists.
+            Build your vinyl dashboard: track releases, rate them, and explore
+            artists.
           </p>
 
           <div className="hero-actions">
-            <Link className="btn" to="/releases" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn"
+              to="/releases"
+              style={{ textDecoration: "none" }}
+            >
               Explore Records
             </Link>
 
-            <Link className="btn-secondary" to="/artists" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn-secondary"
+              to="/artists"
+              style={{ textDecoration: "none" }}
+            >
               Browse Artists
             </Link>
           </div>
@@ -136,7 +167,11 @@ function HomePage({ query = "" }) {
               <option value="Puerto Rico">Puerto Rico</option>
             </select>
 
-            <Link className="btn hero-btn-full" to="/artists" style={{ textDecoration: "none" }}>
+            <Link
+              className="btn hero-btn-full"
+              to="/artists"
+              style={{ textDecoration: "none" }}
+            >
               Explore Artists
             </Link>
 
@@ -189,4 +224,3 @@ function HomePage({ query = "" }) {
 }
 
 export default HomePage;
-

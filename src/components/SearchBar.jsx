@@ -1,9 +1,33 @@
-export default function SearchBar({ value, onChange, placeholder = "Search..." }) {
+// Reusable search input component
+// This component does NOT store its own state.
+// The parent component controls the value.
+
+export default function SearchBar({
+  value,
+  onChange,
+  placeholder = "Search...",
+}) {
+
   return (
     <input
+
+      // ------------------------------------------------------------
+      // CONTROLLED VALUE
+      // The displayed text always comes from parent state
+      // ------------------------------------------------------------
       value={value}
-      onChange={(e) => onChange(e.target.value)} // Actualizamos el estado con el valor del input haciendo una llamada a la función onChange
-      placeholder={placeholder} // Definimos el placeholder del input
+
+      // ------------------------------------------------------------
+      // USER TYPES → notify parent
+      // We send ONLY the text, not the event object
+      // Parent decides what to do with it (filter, API call, etc.)
+      // ------------------------------------------------------------
+      onChange={(e) => onChange(e.target.value)}
+
+      // Default text shown when empty
+      placeholder={placeholder}
+
+      // Inline styles for layout consistency
       style={{
         width: "100%",
         maxWidth: 420,
@@ -14,6 +38,3 @@ export default function SearchBar({ value, onChange, placeholder = "Search..." }
     />
   );
 }
-
-
-// Aqui importamos el componente SearchBar para buscar records creaundo un input que nos permite buscar records.

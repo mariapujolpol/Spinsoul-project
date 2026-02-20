@@ -1,49 +1,80 @@
-import { Link } from "react-router-dom"; // importamos Link de react-router-dom para crear enlaces a otras páginas dentro de nuestra aplicación
+import { Link } from "react-router-dom"; 
 import StarRating from "./StarRating";
 
-export default function ReleaseCard({ release, onDelete }) { // esta funcion exporta el componente ReleaseCard, que recibe un objeto release con la información del lanzamiento y una función onDelete para eliminar el lanzamiento (si se proporciona)
+// This component renders a single Release preview card.
+// It is reusable in multiple pages (list, favorites, etc).
+//
+// Props:
+// - release: object containing release information
+// - onDelete: optional function (if provided → show delete button)
+
+export default function ReleaseCard({ release, onDelete }) {
+
   return (
     <div className="card">
 
-      {onDelete && ( // si se proporciona la función onDelete, mostramos un botón de eliminar en la esquina superior derecha de la tarjeta en releases
+      {/* ------------------------------------------------------------
+          CONDITIONAL DELETE BUTTON
+          Only visible when parent provides onDelete
+          (ex: Releases page, but not in public view pages)
+      ------------------------------------------------------------ */}
+      {onDelete && (
         <button
-  className="delete-btn"
-  onClick={() => onDelete(release.id)}
->
-  <span className="delete-icon">✖</span>
-  <span className="delete-tooltip">Delete release</span>
-</button>
-
+          className="delete-btn"
+          onClick={() => onDelete(release.id)}
+        >
+          <span className="delete-icon">✖</span>
+          <span className="delete-tooltip">Delete release</span>
+        </button>
       )}
 
-      <Link // usamos Link para crear un enlace a la página de detalles del lanzamiento, pasando el id del lanzamiento en la URL
+
+      {/* ------------------------------------------------------------
+          CLICKABLE CARD AREA
+          Navigates to release details page
+          Example: /releases/42
+      ------------------------------------------------------------ */}
+      <Link
         to={`/releases/${release.id}`}
         style={{ textDecoration: "none" }}
       >
-        <img 
+
+        {/* Cover artwork */}
+        <img
           className="cover"
           src={release.coverUrl}
           alt={release.title}
         />
 
+
         <div className="card-body">
+
+          {/* Release title */}
           <h3 className="title">{release.title}</h3>
+
+          {/* Secondary metadata */}
           <p className="subtitle">
             {release.year} • {release.genre}
           </p>
 
+
+          {/* Footer: rating + id */}
           <div className="card-footer">
+
+            {/* Visual star rating */}
+            {/* If rating is undefined, treat as 0 */}
             <span className="stars">
               {"★".repeat(release.rating ?? 0)}
               {"☆".repeat(5 - (release.rating ?? 0))}
             </span>
-            <span style={{ opacity: 0.8 }}>#{release.id}</span>
+
+            {/* Debug / reference id */}
+            <span style={{ opacity: 0.8 }}>
+              #{release.id}
+            </span>
           </div>
         </div>
       </Link>
-
     </div>
   );
 }
-
-

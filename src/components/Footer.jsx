@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Footer() { //Esta función es para el pie de pagina que se encuentra en todas las paginas. Con las diferentes textos y enlaces.
+export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -28,9 +28,15 @@ export default function Footer() { //Esta función es para el pie de pagina que 
         <div className="footer-col">
           <h4 className="footer-title">Connect</h4>
           <div className="footer-links">
-            <a href="#" onClick={(e) => e.preventDefault()}>Twitter</a>
-            <a href="#" onClick={(e) => e.preventDefault()}>Instagram</a>
-            <a href="#" onClick={(e) => e.preventDefault()}>Discord</a>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Twitter
+            </a>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Instagram
+            </a>
+            <a href="#" onClick={(e) => e.preventDefault()}>
+              Discord
+            </a>
           </div>
         </div>
       </div>

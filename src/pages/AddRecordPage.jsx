@@ -2,12 +2,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+// Backend endpoint where new releases are stored
+// NOTE: should evaluate to something like: http://localhost:5005/releases
 const API_URL = "`${import.meta.env.VITE_SERVER_URL}`/releases";
 
 function AddRecordPage() {
+  // Router navigation (after saving)
   const navigate = useNavigate();
-  const location = useLocation(); // 👈 nuevo
 
+  // Access router state (data passed from ImportDiscogsPage)
+  const location = useLocation();
+
+  // ------------------------------------------------------------
+  // FORM STATE (single object = easier updates)
+  // This holds the editable values of the form
+  // ------------------------------------------------------------
   const [form, setForm] = useState({
     title: "",
     artist: "",
@@ -18,41 +27,67 @@ function AddRecordPage() {
     review: "",
   });
 
+  // UI feedback states
   const [isSaving, setIsSaving] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // 👇 nuevo: prefill desde /releases/import
+  // ------------------------------------------------------------
+  // PREFILL FROM IMPORT PAGE
+  // When navigating from /releases/import we receive data via:
+  // navigate("/releases/new", { state: mapped })
+  // ------------------------------------------------------------
   useEffect(() => {
+    // If user opened page normally → no prefill
     if (!location.state) return;
 
+    // Merge imported data into the form
     setForm((prev) => ({
       ...prev,
-      ...location.state, // { title, artist, year, genre, coverUrl }
+      ...location.state, // { title, artist, year, genre, coverUrl, review }
     }));
 
-    // Limpia el state para que no se re-aplique al refrescar
+    // IMPORTANT:
+    // Clear router state so refresh doesn't reapply import
     navigate(location.pathname, { replace: true, state: null });
   }, [location.state]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ------------------------------------------------------------
+  // INPUT HANDLER (generic)
+  // Works for all text inputs using name attribute
+  // ------------------------------------------------------------
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  // ------------------------------------------------------------
+  // SUBMIT HANDLER
+  // Sends the cleaned record to backend
+  // ------------------------------------------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prevent double submit clicks
     if (isSaving) return;
 
+    // Normalize data before sending
     const newRecord = {
       title: form.title.trim(),
       artist: form.artist.trim(),
       genre: form.genre.trim(),
+
+      // Convert year to number (or null)
       year: form.year ? Number(form.year) : null,
+
       coverUrl: form.coverUrl.trim(),
+
+      // Ensure rating is numeric
       rating: Number(form.rating) || 0,
+
       review: form.review.trim(),
     };
 
@@ -60,10 +95,12 @@ function AddRecordPage() {
       setErrorMsg("");
       setIsSaving(true);
 
+      // Send POST request to backend
       await axios.post(API_URL, newRecord, {
         timeout: 15000,
       });
 
+      // After saving → go back to releases list
       navigate("/releases");
     } catch (error) {
       console.log(error);
