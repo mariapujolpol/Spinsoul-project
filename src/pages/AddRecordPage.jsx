@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // Backend endpoint where new releases are stored
 // NOTE: should evaluate to something like: http://localhost:5005/releases
-const API_URL = "`${import.meta.env.VITE_SERVER_URL}`/releases";
+const API_URL = `${import.meta.env.VITE_SERVER_URL}/releases`;
 
 function AddRecordPage() {
   // Router navigation (after saving)
