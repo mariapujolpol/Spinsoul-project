@@ -37,8 +37,8 @@ function HomePage({ query = "" }) {
 
         // Parallel requests (faster than sequential)
         const [artistsRes, releasesRes] = await Promise.all([
-          axios.get("`${import.meta.env.VITE_SERVER_URL}`/artists"),
-          axios.get("`${import.meta.env.VITE_SERVER_URL}`/releases"),
+          axios.get(`${import.meta.env.VITE_SERVER_URL}/artists`),
+          axios.get(`${import.meta.env.VITE_SERVER_URL}/releases`),
         ]);
 
         if (mounted) {
