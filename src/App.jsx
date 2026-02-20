@@ -67,6 +67,7 @@ export default function App() {
           - Pages that need the search query receive it as a prop
           - Details pages use URL params (artistId / releaseId)
       ------------------------------------------------------------ */}
+        <main className="app-main">
       <Routes>
 
         {/* Home uses query for filtering suggestions */}
@@ -94,6 +95,7 @@ export default function App() {
         {/* Catch-all for unknown routes */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
 
       {/* ------------------------------------------------------------
           BOTTOM LAYOUT: FOOTER

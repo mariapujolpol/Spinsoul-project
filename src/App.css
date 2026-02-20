@@ -229,3 +229,25 @@ a{ color: inherit; }
   margin: 0;
   color: var(--muted);
 }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
